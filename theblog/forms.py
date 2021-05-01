@@ -18,3 +18,18 @@ class PostForm(forms.ModelForm):
      		'author':'Escritor',
           	'body':'Texto',
         }
+
+class EditPostForm(forms.ModelForm):
+	class Meta:
+		model = Post
+		fields = ('title', 'title_tag', 'body')
+		widgets = {
+			'title' : forms.TextInput(attrs={'class': 'form-control'}),
+			'title_tag' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'O texto que aparece na aba do navegador'}),
+			'body' : forms.Textarea(attrs={'class': 'form-control'}),
+		}
+		labels  = {
+            'title':'Titulo',
+            'title_tag':'Tag Titulo',
+          	'body':'Texto',
+        }
