@@ -13,9 +13,14 @@
 		<form method="POST" >
 			{% csrf_token %}
 			{{ form.as_p }}
-			<button class='btn btn-secondary'>post</button>
+			<button class='btn btn-secondary'>Post</button>
 		</form>
 	</div>
+
+	<script>
+		var name = "{{ user.id }}";
+		document.getElementById('author').value = name;
+	</script>
 {% else %}
 
 	sai daqui, todo dia isso
