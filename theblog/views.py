@@ -35,9 +35,17 @@ class DeletePostView(DeleteView):
 	template_name = 'delete_post.html'
 	success_url = reverse_lazy('home')
 
+#_-_-_-_-_-_-_-_-_-_-_-_-Category_-_-_-_-_-_-_-_-_-_-_-_-#
 class AddCategoryView(CreateView):
 	model = Category
 	#form_class = CategoryForm
 	template_name = 'add_category.html'
 	fields = '__all__'
 	#fields = '__all__'
+
+def CategoryView(request, cats):
+	category_posts = Post.objects.filter(category=cats)
+	context =  {'category_posts':category_posts, 'cats':cats}
+
+
+	return render(request, 'categories.html', context)
