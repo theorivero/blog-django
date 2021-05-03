@@ -44,6 +44,7 @@ class AddCategoryView(CreateView):
 	#fields = '__all__'
 
 def CategoryView(request, cats):
+	cats = cats.replace('-', ' ')
 	category_posts = Post.objects.filter(category=cats)
 	context =  {'category_posts':category_posts, 'cats':cats}
 

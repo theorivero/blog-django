@@ -15,7 +15,7 @@ class PostForm(forms.ModelForm):
 			'title' : forms.TextInput(attrs={'class': 'form-control'}),
 			'title_tag' : forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'O texto que aparece na aba do navegador'}),
 			'author' : forms.Select(attrs={'class': 'form-control'}),
-			'category' : forms.Select(choices=choice_list,attrs={'class': 'form-control'}),
+			'category' : forms.Select(choices=Category.objects.all().values_list('name', 'name'),attrs={'class': 'form-control'}),
 			'body' : forms.Textarea(attrs={'class': 'form-control'}),
 		}
 		labels  = {
