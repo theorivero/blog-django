@@ -2,7 +2,7 @@
 {% block title %}{{post.title_tag}}{% endblock %}
 {% block content %}
 
-	<h1>{{post.title}}</h1>
+	<h1>{{post.title}} </h1>
 	<hr>
 	<p>{{post.body|safe}}</p>
 	<small>Posted at: {{post.post_date}} By: {{post.author.first_name}} {{post.author.last_name}}</small>
@@ -18,7 +18,17 @@
 	</br></br>
 	<form action="{% url 'like_post' post.pk %}" method='POST'>
 		{% csrf_token %}
-		<button type=submit name='post_id' value='{{post.id}}' class='btn btn-primary'>Like</button> - {{total_likes}} Likes
+	{% if user.is_authenticated %}
+		{% if liked %}
+			<button type=submit name='post_id' value='{{post.id}}' class='btn btn-danger'>Unlike</button> - {{total_likes}} Likes
+		{% else %}
+			<button type=submit name='post_id' value='{{post.id}}' class='btn btn-primary'>Like</button> - {{total_likes}} Likes
+		{% endif %}
+	{% else %}
+		
+		<a class="nav-link" href="{% url 'login' %}">Login to like</a>
+	    
+	{% endif %}
 	</form>
 
 

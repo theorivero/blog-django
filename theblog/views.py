@@ -19,6 +19,8 @@ class HomeView(ListView):
 		context['cat_menu'] = cat_menu
 		return context
 
+#_-_-_-_-_-_-_-_-_-_-_-_-Posts-_-_-_-_-_-_-_-_-_-_-_-#
+
 class ArticleDetailView(DetailView):
 	model = Post
 	template_name = 'article_details.html'
@@ -26,6 +28,12 @@ class ArticleDetailView(DetailView):
 		cat_menu = Category.objects.all()
 		context = super(ArticleDetailView,self).get_context_data(*args, **kwargs)
 		post = get_object_or_404(Post, id=self.kwargs['pk'])
+
+		liked = False
+		if post.likes.filter(id=self.request.user.id).exists():
+			liked = True
+		
+		context['liked'] = liked
 		context['total_likes'] = post.total_likes()
 		context['cat_menu'] = cat_menu
 		return context
@@ -75,6 +83,12 @@ def CategoryListView(request):
 #_-_-_-_-_-_-_-_-_-_-_-_-Likes-_-_-_-_-_-_-_-_-_-_-_-#
 def LikeView(request, pk):
 	post = get_object_or_404(Post, id=request.POST.get('post_id'))
-	post.likes.add(request.user)
+	liked=False
+	if post.likes.filter(id=request.user.id).exists():
+		post.likes.remove(request.user)
+		liked = False
+	else:
+		post.likes.add(request.user)
+		liked = True
 
 	return HttpResponseRedirect(reverse('article-detail', args=[str(pk)]))
