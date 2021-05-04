@@ -4,6 +4,9 @@
 
 	<h1>{{post.title}} </h1>
 	<hr>
+	{% if post.header_image %}
+		<img src="{{post.header_image.url}}" width="200px" height="200px">
+	{% endif %}
 	<p>{{post.body|safe}}</p>
 	<small>Posted at: {{post.post_date}} By: {{post.author.first_name}} {{post.author.last_name}}</small>
 	</br></br>
