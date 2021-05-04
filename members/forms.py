@@ -1,7 +1,8 @@
 from .models import *
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.models import User
 from django import forms
+from django.utils.translation import ugettext, ugettext_lazy as _
 
 
 
@@ -38,6 +39,15 @@ class EditProfileForm(UserChangeForm):
 		model = User
 		fields = ('username', 'first_name', 'last_name', 'email', 'is_active')
 
-	
+
+class ChangePasswordForm(PasswordChangeForm):
+	old_password = forms.CharField(label=_("Senha Autal"), widget=forms.PasswordInput(attrs={'class': 'form-control', 'type':'password'}))
+	new_password1 = forms.CharField(label=_("Senha Nova"),widget=forms.PasswordInput(attrs={'class': 'form-control', 'type':'password'}))
+	new_password2 = forms.CharField(label=_("Senha Nova"),widget=forms.PasswordInput(attrs={'class': 'form-control', 'type':'password'}))
+
+	class Meta:
+		model = User
+		fields = ('old_password', 'new_password1', 'new_password2')
+
 
 	
