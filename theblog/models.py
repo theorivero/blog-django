@@ -18,10 +18,11 @@ class Category(models.Model):
 class Post(models.Model):
 	title = models.CharField(max_length=255)
 	title_tag = models.CharField(max_length=255)
+	snippet = models.CharField(max_length=255)
 	author = models.ForeignKey(User, on_delete=models.CASCADE) #models.CASCADE caso o user seja apagado todos os seus posts são apagados tbm
 	body = RichTextField(blank=True)
 	post_date = models.DateField(auto_now_add=True)
-	category = models.CharField(max_length=255, default='coding')
+	category = models.CharField(max_length=255)
 	likes = models.ManyToManyField(User, related_name='blog_post')
 
 	def total_likes(self):
