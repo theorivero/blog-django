@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}User Profie{% endblock %}
+{% load static %}
+
+{% block content %}
+
+<h1>User Profile</h1>
+
+<div class="card" style="width: 18rem;">
+{% if page_user.profile_pic%}
+  <img class="card-img-top" src="{{profile.profile_pic.url}}" width="180px" height="286px" >
+{% else %}
+  <img class="card-img-top" src="{% static 'theblog/images/everson.jpg' %}" width="180px" height="286px" >
+{%endif%}
+	<div class="card-body">
+	  	<a href="{% url 'profile' profile.id%}">
+	    	<h5 class="card-title">{{profile.user.first_name}} {{profile.user.last_name}}</h5>
+		</a>
+		<p class="small text-muted">
+	    	{% if profile.website_url%}
+	    	<a href="{{profile.website_url}}">Website</a> | 
+	    	{%endif%}
+	    	{% if profile.facebook_url%}
+	    	<a href="{{profile.facebook_url}}">Facebook</a> | 
+	    	{%endif%}
+	    	{% if profile.twitter_url%}
+	    	<a href="{{profile.twitter_url}}">Twitter</a> | 
+	    	{%endif%}
+	    	{% if profile.instagram_url%}
+	    	<a href="{{profile.instagram_url}}">Instagram</a></p>
+	    	{%endif%}
+	    <p class="card-text">{{profile.bio}}</p>
+    <a href="{% url 'profile' profile.id%}" class="btn btn-primary">Mais sobre o {{profile.user.first_name}}</a>
+	</div>
+
+</div>
+
+
+{% endblock %}

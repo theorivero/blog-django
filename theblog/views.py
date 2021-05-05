@@ -92,3 +92,5 @@ def LikeView(request, pk):
 		liked = True
 
 	return HttpResponseRedirect(reverse('article-detail', args=[str(pk)]))
+
+	
