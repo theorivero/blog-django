@@ -30,23 +30,21 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'add_category' %}">Add Category</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
+                Profile
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'edit_profile' %}">Edit Settings</a>
+                    <a class="dropdown-item" href="{% url 'edit_profile_page' user.profile.id %}">Edit Profile</a>
+                    <a class="dropdown-item" href="{% url 'profile' user.profile.id %}">Show Profile</a>
+
+              </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'edit_profile' %}">Edit Profile</a>
-            </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'register' %}">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">Login</a>
-          </li>
           {% endif %}
           {% if cat_menu %}
            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true">
                 Categories
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -62,6 +60,25 @@
           {% endif %}
         </ul>
       </div>
+      <div class="navbar-collapse collapse  order-3 dual-collapse2">
+          <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+
+          {% else %} 
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+          {% endif %}
+
+          </ul>
+      </div>
+
     </nav>
     </br>
     <div class='container'>
