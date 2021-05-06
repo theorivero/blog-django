@@ -48,3 +48,13 @@ class EditProfilePageView(UpdateView):
 	fields = ('bio', 'profile_pic', 'website_url', 'facebook_url', 'twitter_url', 'instagram_url')
 	success_url = reverse_lazy('home')
 
+class CreateProfilePageView(generic.CreateView):
+	model = Profile
+	template_name = 'registration/create_profile_page.html'
+	form_class = ProfilePageForm
+
+
+	def form_valid(self, form):
+		form.instance.user = self.request.user
+		form.instance.instagram_url = 'https://twitter.com/theo_rivero'
+		return super().form_valid(form)
